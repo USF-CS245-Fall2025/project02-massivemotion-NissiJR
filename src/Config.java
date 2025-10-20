@@ -30,8 +30,19 @@ public class Config {
             }
         }
         timerDelay = getInt(p, "timer_delay", 75);
+<<<<<<< HEAD
         listType = p.getProperty("list", "arraylist").trim();
 
+=======
+        String listProp = p.getProperty("list");  // try to read 'list' from file
+        if (listProp == null || listProp.trim().isEmpty()) { // No list type specified: pick a random one
+            String[] listOptions = {"arraylist", "single", "double", "dummyhead", "circular"};
+            listType = listOptions[new Random().nextInt(listOptions.length)];
+            System.out.println("[Config] No 'list' specified; randomly selected: " + listType);
+        } else {
+            listType = listProp.trim().toLowerCase();
+        }
+>>>>>>> 548f765d72bf670da0298225c041b450b4ecbec2
         windowSizeX = getInt(p, "window_size_x", 1024);
         windowSizeY = getInt(p, "window_size_y", 768);
 
