@@ -31,7 +31,6 @@ public class Config {
         }
         timerDelay = getInt(p, "timer_delay", 75);
         listType = p.getProperty("list", "arraylist").trim();
-
         windowSizeX = getInt(p, "window_size_x", 1024);
         windowSizeY = getInt(p, "window_size_y", 768);
 
