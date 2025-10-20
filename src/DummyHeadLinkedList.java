@@ -1,5 +1,3 @@
-package lists;
-
 public class DummyHeadLinkedList<T> implements List<T> {
     private static final class Node<T> {
         T value;
