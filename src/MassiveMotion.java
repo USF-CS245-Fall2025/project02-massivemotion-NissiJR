@@ -13,50 +13,68 @@ public class MassiveMotion extends JPanel implements ActionListener {
     private final int redX;
     private final int redY;
 
-    private static final int NUM_BLUE = 10;
-    private final int[] bx = new int[NUM_BLUE];
-    private final int[] by = new int[NUM_BLUE];
-    private final int[] vx = new int[NUM_BLUE];
-    private final int[] vy = new int[NUM_BLUE];
+    private static final int COMETS = 10;
+    private final List<Comet> comets;
 
     private final Random rnd = new Random();
     
-
+    private static final class Comet {
+        int bx, by, vx, vy;
+        public Comet(int x, int y, int vx, int vy) {
+            this.bx = x;
+            this.by = y;
+            this.vx = vx;
+            this.vy = vy;
+        }
+    }
     public MassiveMotion(String propfile) {
         // TODO: insert your code to read from configuration file here.
         cfg = new Config(propfile);
         tm = new Timer(cfg.timerDelay, this); // TODO: Replace the first argument with delay with value from config file.
 
+        switch (cfg.listType) {
+            case "arraylist":
+                comets = new ArrayList<>();
+                break;
+            case "singlylinkedlist":
+                comets = new SinglyLinkedList<>();
+                break;
+            case "doublylinkedlist":
+                comets = new DoublyLinkedList<>();
+                break;
+            case "dummyheadlinkedlist":
+                comets = new DummyHeadLinkedList<>();
+                break;
+            default:
+                comets = new ArrayList<>();
+                break;
+        }
+
         // TODO: Consider removing the next two lines (coordinates) for random starting locations.
         redX = cfg.windowSizeX / 2 - 10;
         redY = cfg.windowSizeY / 2 - 10;
 
-        for (int i = 0; i < NUM_BLUE; i++) {
-            bx[i] = rnd.nextInt(cfg.windowSizeX - 20);
-            by[i] = rnd.nextInt(cfg.windowSizeY - 20);
+        for (int i = 0; i < COMETS; i++) {
+            int bx = rnd.nextInt(Math.max(1, cfg.windowSizeX - 20));
+            int by = rnd.nextInt(Math.max(1, cfg.windowSizeY - 20));
 
-            vx[i] = rnd.nextInt(11) - 5;
-            vy[i] = rnd.nextInt(11) - 5;
-            if (vx[i] == 0) vx[i] = 2;
-            if (vy[i] == 0) vy[i] = -3;
+            int vx = rnd.nextInt(11) - 5;
+            int vy = rnd.nextInt(11) - 5;
+            comets.add(new Comet(bx, by, vx, vy));
         }
 
-        setPreferredSize(new Dimension(cfg.windowSizeX, cfg.windowSizeY));
+        setPreferredSize(new Dimension(cfg.windowSizeY, cfg.windowSizeX));
         setBackground(Color.WHITE);
     }
-
-    public MassiveMotion() {
-        this("MassiveMotion.txt");
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Probably best you leave this as is.
 
         // TODO: Paint each ball. Here's how to paint two balls, one after the other:
-        g.setColor(Color.BLUE);
-        for (int i = 0; i < NUM_BLUE; i++) {
-            g.fillOval(bx[i], by[i], 10, 10);
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < COMETS; i++) {
+            Comet c = comets.get(i);
+            g.fillOval(c.bx, c.by, 10, 10);
 
         }
         g.setColor(Color.RED);
@@ -71,17 +89,10 @@ public class MassiveMotion extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         // TODO: Change the location of each ball. Here's an example of them moving across the screen:
         //       ... but to be clear, you should change this.
-        for (int i = 0; i < NUM_BLUE; i++) {
-            bx[i] += vx[i];
-            by[i] += vy[i];
-        // These two "if" statements keep the balls on the screen in case they go off one side.
-            if (bx[i] <= 0 || bx[i] >= cfg.windowSizeX - 20) {
-                vx[i] *= -1;
-            }
-                
-            if (by[i] <= 0 || by[i] >= cfg.windowSizeY - 20) {
-                vy[i] *= -1;
-            }
+        for (int i = 0; i < comets.size(); i++) {
+            Comet c = comets.get(i);
+            c.bx += c.vx;
+            c.by += c.vy;
         }
         // Keep this at the end of the function (no matter what you do above):
         repaint();
