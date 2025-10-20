@@ -102,7 +102,7 @@ public class SinglyLinkedList<T> implements List<T> {
 
     private void check (int index) {
         if (index < 0 || index > n) {
-            throw new IndexOutofBoundsExceptions();
+            throw new IndexOutOfBoundsException();
         }
     }
 }

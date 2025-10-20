@@ -4,6 +4,7 @@ public class DoublyLinkedList<T> implements List<T> {
     private static final class Node<T> {
         T value;
         Node<T> next;
+        Node<T> prev;
         Node (T val) {
             this.value = val;
         }
@@ -140,7 +141,7 @@ public class DoublyLinkedList<T> implements List<T> {
 
     private void check (int index) {
         if (index < 0 || index > n) {
-            throw new IndexOutofBoundsExceptions();
+            throw new IndexOutOfBoundsException();
         }
     }
 }

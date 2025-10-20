@@ -66,7 +66,7 @@ public class DummyHeadLinkedList<T> implements List<T> {
             tail = prev; 
         }
         n--;
-        return removed.val;
+        return removed.value;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class DummyHeadLinkedList<T> implements List<T> {
 
     private void check (int index) {
         if (index < 0 || index > n) {
-            throw new IndexOutofBoundsExceptions();
+            throw new IndexOutOfBoundsException();
         }
     }
 }

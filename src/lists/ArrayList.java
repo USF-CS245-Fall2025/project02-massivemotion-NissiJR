@@ -4,7 +4,7 @@ public class ArrayList<T> implements List<T> {
     private Object[] data;
     private int n;
 
-    public Arraylist() {
+    public ArrayList() {
         this.data = new Object[10];
         this.n = 0;
     }
@@ -28,6 +28,7 @@ public class ArrayList<T> implements List<T> {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T get(int index) {
         check(index);
@@ -37,6 +38,7 @@ public class ArrayList<T> implements List<T> {
     @Override
     public T remove(int index) {
         check(index);
+        @SuppressWarnings("unchecked")
         T old = (T) data[index];
 
         for (int i = index; i < n - 1; i++) { 
@@ -50,7 +52,7 @@ public class ArrayList<T> implements List<T> {
 
     private void check (int index) {
         if (index < 0 || index > n) {
-            throw new IndexOutofBoundsExceptions();
+            throw new IndexOutOfBoundsException();
         }
     }
 }
