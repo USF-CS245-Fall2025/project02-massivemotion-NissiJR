@@ -5,6 +5,16 @@ import java.awt.event.ActionListener;
 
 import java.util.Random;
 
+/*
+ * The MassiveMotion class creates a graphical simulation
+ * of moving comet-like objects around a stationary red center (representing a star).
+ * This simulation uses a configurable properties file to define behavior such as
+ * timer delay, window size, and the type of list used to store comets. The simulation
+ * uses Swing's Timer for animation updates and the JPanel paint
+ * mechanism to render motion.
+@author NissiJR
+@version 8.0
+*/
 public class MassiveMotion extends JPanel implements ActionListener {
 
     protected Timer tm;
@@ -18,6 +28,14 @@ public class MassiveMotion extends JPanel implements ActionListener {
 
     private final Random rnd = new Random();
     
+    /**
+     * Constructs a new {@code Comet} instance with given position and velocity.
+     *
+     * @param x  initial X-coordinate
+     * @param y  initial Y-coordinate
+     * @param vx horizontal velocity
+     * @param vy vertical velocity
+    */
     private static final class Comet {
         int bx, by, vx, vy;
         public Comet(int x, int y, int vx, int vy) {
@@ -27,6 +45,13 @@ public class MassiveMotion extends JPanel implements ActionListener {
             this.vy = vy;
         }
     }
+
+    /**
+     * Constructs the simulation using a configuration file path.
+     * Initializes comet positions, velocities, and list type from configuration.
+     *
+     * @param propfile the name or path of the properties file used for configuration
+     */
     public MassiveMotion(String propfile) {
         // TODO: insert your code to read from configuration file here.
         cfg = new Config(propfile);
@@ -66,6 +91,13 @@ public class MassiveMotion extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(cfg.windowSizeY, cfg.windowSizeX));
         setBackground(Color.WHITE);
     }
+
+    /**
+     * Paints all comets and the stationary central red object on the panel.
+     * The comets are drawn in black, and the red object represents the star at the center.
+     *
+     * @param g the Graphics context used for drawing
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Probably best you leave this as is.
@@ -84,7 +116,12 @@ public class MassiveMotion extends JPanel implements ActionListener {
         tm.start();
     }
 
-
+    /**
+     * Handles timer events to update comet positions and repaint the panel.
+     * This method drives the comet motion across frames.
+     *
+     * @param actionEvent the action event triggered by the Swing Timer
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         // TODO: Change the location of each ball. Here's an example of them moving across the screen:
@@ -98,6 +135,12 @@ public class MassiveMotion extends JPanel implements ActionListener {
         repaint();
     }
 
+    /**
+     * Main entry point of the program.
+     * Initializes and displays the MassiveMotion simulation in a JFrame.
+     *
+     * @param args optional argument specifying a configuration file
+     */
     public static void main(String[] args) {
         MassiveMotion mm = (args.length > 0) ? new MassiveMotion(args[0]) : new MassiveMotion("MassiveMotion.txt");
 
