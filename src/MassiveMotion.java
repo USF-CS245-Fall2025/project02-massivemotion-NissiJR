@@ -13,7 +13,7 @@ public class MassiveMotion extends JPanel implements ActionListener {
     private final int redX;
     private final int redY;
 
-    private static final int COMETS = 20;
+    private static final int COMETS = 30;
     private final List<Comet> comets;
 
     private final Random rnd = new Random();
