@@ -36,8 +36,8 @@ Create a `MassiveMotion.txt` file in the project root with the following propert
 
 ```properties
 timer_delay = 75
-list = arraylist            #Options: arraylist, singlylinkedlist,
-                            #doublylinkedlist, dummyheadlinkedlist.
+list = arraylist            #Options: arraylist, singlylinkedlist, doublylinkedlist, dummyheadlinkedlist.
+
 window_size_x = 1024
 window_size_y = 768
 
