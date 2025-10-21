@@ -36,8 +36,8 @@ Create a `MassiveMotion.txt` file in the project root with the following propert
 
 ```properties
 timer_delay = 75
-list = arraylist            #Options: arraylist, singlylinkedlist, doublylinkedlist, dummyheadlinkedlist.
-
+list = arraylist            #Options: arraylist, singlylinkedlist,
+                            #doublylinkedlist, dummyheadlinkedlist.
 window_size_x = 1024
 window_size_y = 768
 
@@ -73,4 +73,16 @@ javac src/MassiveMotion MassiveMotion.txt
    - Generates 10 comets with random positions and velocities
    - Sets up the GUI window and timer
 
-2. 
+2. **Animation Loop**:
+   - Timer triggers the `actionPerformed` method every `timer_delay` milliseconds
+   - Each comet's position is updated based on its velocity
+   - Comets bounce off window edges (velocity reversal)
+   - Screen is repainted to show new positions
+
+3. **List Usage**:
+   - Comets are stored in the configured list implementation
+   - The animation loop iterates through the list using `get(i)`
+   - Demonstrates real-world usage of different data structures
+  
+## Demostration
+
