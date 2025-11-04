@@ -59,11 +59,11 @@ star_velocity_y = 0
 
 ### To compile
 ```bash
-javac src/*.java
+javac *.java
 ```
 ### To Execute
 ```bash
-javac src/MassiveMotion MassiveMotion.txt
+java MassiveMotion ..\MassiveMotion.txt
 ```
 
 ## How it works
