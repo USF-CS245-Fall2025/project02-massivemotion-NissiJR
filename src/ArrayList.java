@@ -49,6 +49,11 @@ public class ArrayList<T> implements List<T> {
      */
     @Override 
     public boolean add(T element) {
+        if (n >= data.length) {
+            Object[] newData = new Object[data.length * 2];
+            System.arraycopy(data, 0, newData, 0, data.length);
+            data = newData;
+        }
         data[n] = element;
         n++;
         return true;

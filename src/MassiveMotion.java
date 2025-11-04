@@ -27,7 +27,8 @@ public class MassiveMotion extends JPanel implements ActionListener {
     private final List<Comet> comets;
 
     private final Random rnd = new Random();
-    
+    private static JFrame frame;
+
     /**
      * Constructs a new {@code Comet} instance with given position and velocity.
      *
@@ -104,7 +105,7 @@ public class MassiveMotion extends JPanel implements ActionListener {
 
         // TODO: Paint each ball. Here's how to paint two balls, one after the other:
         g.setColor(Color.BLACK);
-        for (int i = 0; i < COMETS; i++) {
+        for (int i = 0; i < comets.size(); i++) {
             Comet c = comets.get(i);
             g.fillOval(c.bx, c.by, 10, 10);
 
@@ -114,6 +115,31 @@ public class MassiveMotion extends JPanel implements ActionListener {
 
         // Recommend you leave the next line as is
         tm.start();
+    }
+
+    /**
+     * Checks if a comet is off the screen.
+     *
+     * @param c the comet to check
+     * @return true if the comet is completely off-screen, false otherwise
+     */
+    private boolean isCometOffScreen(Comet c) {
+        return c.bx < -20 || c.bx > cfg.windowSizeX + 20 ||
+               c.by < -20 || c.by > cfg.windowSizeY + 20;
+    }
+
+    /**
+     * Checks if all comets have left the screen.
+     *
+     * @return true if all comets are off-screen, false otherwise
+     */
+    private boolean allCometsOffScreen() {
+        for (int i = 0; i < comets.size(); i++) {
+            if (!isCometOffScreen(comets.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -131,8 +157,26 @@ public class MassiveMotion extends JPanel implements ActionListener {
             c.bx += c.vx;
             c.by += c.vy;
         }
+
+        // Check if all comets have left the screen
+        if (allCometsOffScreen()) {
+            closeWindow();
+            System.exit(0);
+        }
+
         // Keep this at the end of the function (no matter what you do above):
         repaint();
+    }
+
+    /**
+     * Closes the MassiveMotion window and displays an end message.
+     */
+    public void closeWindow() {
+        tm.stop();
+        System.out.println("Massive motion ended");
+        if (frame != null) {
+            frame.dispose();
+        }
     }
 
     /**
@@ -142,13 +186,14 @@ public class MassiveMotion extends JPanel implements ActionListener {
      * @param args optional argument specifying a configuration file
      */
     public static void main(String[] args) {
+        System.out.println("Massive motion starting");
         MassiveMotion mm = (args.length > 0) ? new MassiveMotion(args[0]) : new MassiveMotion("MassiveMotion.txt");
 
-        JFrame jf = new JFrame();
-        jf.setTitle("Massive Motion");
-        jf.setSize(mm.cfg.windowSizeX, mm.cfg.windowSizeY); // TODO: Replace with the size from configuration!
-        jf.add(mm);
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = new JFrame();
+        frame.setTitle("Massive Motion");
+        frame.setSize(mm.cfg.windowSizeX, mm.cfg.windowSizeY); // TODO: Replace with the size from configuration!
+        frame.add(mm);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
