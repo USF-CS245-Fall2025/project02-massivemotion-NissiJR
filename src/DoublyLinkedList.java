@@ -44,7 +44,7 @@ public class DoublyLinkedList<T> implements List<T> {
     * Adds an element at the specified index in the list.
     * @param index the position to insert the element
     * @param element the element to be added
-    * @throws IndexOutOfBoundsException if the index is out of range
+    * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
     */
     @Override
     public void add(int index, T element) {
@@ -108,7 +108,7 @@ public class DoublyLinkedList<T> implements List<T> {
     * Retrieves the element at the specified index.
     * @param index the position of the element to retrieve
     * @return the element at the specified index
-    * @throws IndexOutOfBoundsException if the index is out of range
+    * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
     */
     @Override
     public T get(int index) {
@@ -132,7 +132,7 @@ public class DoublyLinkedList<T> implements List<T> {
     * Removes the element at the specified index.
     * @param index the position of the element to remove
     * @return the removed element
-    * @throws IndexOutOfBoundsException if the index is out of range
+    * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
     */
     @Override
     public T remove(int index) {
@@ -191,7 +191,7 @@ public class DoublyLinkedList<T> implements List<T> {
      * Checks if the given index is within the valid range of the list.
      * 
      * @param index the index to check
-     * @throws IndexOutOfBoundsException if the index is invalid
+     * @throws IndexOutOfBoundsException if the index is invalid (index < 0 || index > n)
      */
     private void check (int index) {
         if (index < 0 || index > n) {

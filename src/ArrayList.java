@@ -37,6 +37,14 @@ public class ArrayList<T> implements List<T> {
     @Override 
     public void add(int index, T element) {
         check(index);
+        if (n >= data.length) {
+            Object[] newData = new Object[data.length * 2];
+            System.arraycopy(data, 0, newData, 0, data.length);
+            data = newData;
+        }
+        for (int i = n; i > index; i--){
+            data[i] = data[i - 1];
+        }
         data[index] = element;
         n++;
     }
@@ -64,7 +72,7 @@ public class ArrayList<T> implements List<T> {
      * 
      * @param index the position of the element to return
      * @return the element at the specified index
-     * @throws IndexOutOfBoundsException if the index is out of range
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -79,7 +87,7 @@ public class ArrayList<T> implements List<T> {
      * 
      * @param index the position of the element to remove
      * @return the element that was removed from the list
-     * @throws IndexOutOfBoundsException if the index is out of range
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
      */
     @Override
     public T remove(int index) {
