@@ -32,7 +32,7 @@ public class ArrayList<T> implements List<T> {
      * 
      * @param index the position where the element should be inserted
      * @param element the element to be added
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override 
     public void add(int index, T element) {
@@ -72,7 +72,7 @@ public class ArrayList<T> implements List<T> {
      * 
      * @param index the position of the element to return
      * @return the element at the specified index
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -87,7 +87,7 @@ public class ArrayList<T> implements List<T> {
      * 
      * @param index the position of the element to remove
      * @return the element that was removed from the list
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public T remove(int index) {
@@ -111,7 +111,7 @@ public class ArrayList<T> implements List<T> {
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     private void check (int index) {
-        if (index < 0 || index > n) {
+        if (index < 0 || index > n - 1) {
             throw new IndexOutOfBoundsException();
         }
     }

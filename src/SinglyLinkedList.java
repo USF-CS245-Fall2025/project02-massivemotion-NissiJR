@@ -36,7 +36,7 @@ public class SinglyLinkedList<T> implements List<T> {
      * Adds the specified element at the specified position in this list.
      * @param index the index at which the specified element is to be inserted
      * @param element the element to be inserted
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public void add(int index, T element) {
@@ -72,8 +72,7 @@ public class SinglyLinkedList<T> implements List<T> {
     public boolean add(T element) {
         Node<T> node = new Node<>(element);
         if (tail == null) {
-            head = tail;
-            tail = node;
+            head = node;
         } else {
             tail.next = node;
             tail = node;
@@ -86,7 +85,7 @@ public class SinglyLinkedList<T> implements List<T> {
      * Returns the element at the specified position in this list.
      * @param index the index of the element to return
      * @return the element at the specified position in this list
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public T get(int index) {
@@ -102,7 +101,7 @@ public class SinglyLinkedList<T> implements List<T> {
      * Removes the element at the specified position in this list.
      * @param index the index of the element to be removed
      * @return the element previously at the specified position
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public T remove(int index) {
@@ -143,10 +142,10 @@ public class SinglyLinkedList<T> implements List<T> {
     /**
      * Checks if the given index is within the bounds of the list.
      * @param index the index to be checked
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     private void check (int index) {
-        if (index < 0 || index > n) {
+        if (index < 0 || index > n - 1) {
             throw new IndexOutOfBoundsException();
         }
     }

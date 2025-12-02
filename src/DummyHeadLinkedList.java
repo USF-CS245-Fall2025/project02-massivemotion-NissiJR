@@ -38,7 +38,7 @@ public class DummyHeadLinkedList<T> implements List<T> {
      * Adds an element at the specified index in the list.
      * @param index the index at which the element should be added
      * @param element the element to be added
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public void add(int index, T element) {
@@ -74,7 +74,7 @@ public class DummyHeadLinkedList<T> implements List<T> {
      * Retrieves the element at the specified index in the list.
      * @param index the index of the element to retrieve
      * @return the element at the specified index
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public T get(int index) {
@@ -90,7 +90,7 @@ public class DummyHeadLinkedList<T> implements List<T> {
      * Removes the element at the specified index in the list.
      * @param index the index of the element to remove
      * @return the removed element
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > n-1)
      */
     @Override
     public T remove(int index) {
@@ -121,10 +121,10 @@ public class DummyHeadLinkedList<T> implements List<T> {
      * Checks if the given index is within the valid range of the list.
      * 
      * @param index the index to check
-     * @throws IndexOutOfBoundsException if the index is invalid (index < 0 || index > n)
+     * @throws IndexOutOfBoundsException if the index is invalid (index < 0 || index > n-1)
      */
     private void check (int index) {
-        if (index < 0 || index > n) {
+        if (index < 0 || index > n-1) {
             throw new IndexOutOfBoundsException();
         }
     }
